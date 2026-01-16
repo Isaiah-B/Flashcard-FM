@@ -1,0 +1,106 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --app-neutral-900: #2E1401;
+  --app-neutral-600: #6D5B4D;
+  --app-neutral-100: #F7F3F0;
+  --app-white: #ffffff;
+
+  --app-yellow-500: #F8CB46;
+  --app-blue-600: #5072C7;
+  --app-blue-400: #92ADEB;
+  --app-teal-400: #47D9C9;
+  --app-pink-700: #E11966;
+  --app-pink-500: #F073A3;
+  --app-pink-400: #FC8AE5;
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-background: var(--app-neutral-100);
+  --color-border: var(--app-neutral-900);
+
+  --color-text: var(--app-neutral-900);
+
+  --color-branding: var(--app-yellow-500);
+}
+
+:root {
+  --text-base: 1rem;
+  --text-3xl: calc(var(--text-base) * 2.5);   /* 40px */
+  --text-2xl: calc(var(--text-base) * 2);     /* 32px */
+  --text-xl: calc(var(--text-base) * 1.5);    /* 24px */
+  --text-lg: calc(var(--text-base) * 1.25);   /* 20px */
+  --text-md: calc(var(--text-base) * 1);      /* 16px */
+  --text-sm: calc(var(--text-base) * 0.875);  /* 14px */
+  --text-xs: calc(var(--text-base) * 0.75);   /* 12px */
+}
+
+:root {
+  --app-spacing: 1rem;
+  --app-spacing-140: calc(var(--app-spacing) * 8.75);
+  --app-spacing-128: calc(var(--app-spacing) * 8);
+  --app-spacing-112: calc(var(--app-spacing) * 7);
+  --app-spacing-96: calc(var(--app-spacing) * 6);
+  --app-spacing-80: calc(var(--app-spacing) * 5);
+  --app-spacing-64: calc(var(--app-spacing) * 4);
+  --app-spacing-48: calc(var(--app-spacing) * 3);
+  --app-spacing-40: calc(var(--app-spacing) * 2.5);
+  --app-spacing-32: calc(var(--app-spacing) * 2);
+  --app-spacing-24: calc(var(--app-spacing) * 1.5);
+  --app-spacing-20: calc(var(--app-spacing) * 1.25);
+  --app-spacing-16: calc(var(--app-spacing) * 1);
+  --app-spacing-12: calc(var(--app-spacing) * 0.75);
+  --app-spacing-10: calc(var(--app-spacing) * 0.625);
+  --app-spacing-8: calc(var(--app-spacing) * 0.5);
+  --app-spacing-6: calc(var(--app-spacing) * 0.375);
+  --app-spacing-4: calc(var(--app-spacing) * 0.25);
+  --app-spacing-2: calc(var(--app-spacing) * 0.125);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--vt-c-black);
+    --color-background-soft: var(--vt-c-black-soft);
+    --color-background-mute: var(--vt-c-black-mute);
+
+    --color-border: var(--vt-c-divider-dark-2);
+    --color-border-hover: var(--vt-c-divider-dark-1);
+
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
+  }
+} */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    'Poppins',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
