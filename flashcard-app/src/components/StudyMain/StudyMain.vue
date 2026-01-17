@@ -7,8 +7,13 @@
     import IconChevronRight from '../icons/IconChevronRight.vue';
 
     import StudyHeader from './StudyHeader.vue';
+    import StudyModeFlashcard from './StudyModeFlashcard.vue';
+    
+    import { type Flashcard } from '@/types/flashcard';
 
-    const hasData = ref(false);
+    import data from '../../../data.json';
+
+    const cards = ref<Flashcard[]>(data.flashcards);
 </script>
 
 <template>
@@ -16,21 +21,10 @@
         <StudyHeader />
         
         <div class="main-card--content">
-            <div v-if="hasData" class="card-content">        
-                <div class="main-card--footer">
-                    <Button variant="secondary">
-                        <IconChevronLeft />
-                        Previous
-                    </Button>
-        
-                    <span>Card 1 of 40</span>
-        
-                    <Button variant="secondary">
-                        Next
-                        <IconChevronRight />
-                    </Button>
-                </div>
-            </div>
+            <StudyModeFlashcard v-if="cards.length > 0"
+                :props="cards[0]!"
+            />
+            
     
             <div v-else class="no-content">
                 <h1>No cards to study</h1>
@@ -44,14 +38,28 @@
                 </Button>
             </div>
         </div>
+
+        <div v-if="cards.length > 0" class="main-card--footer">
+            <Button variant="secondary">
+                <IconChevronLeft />
+                Previous
+            </Button>
+
+            <span class="card-count">Card 1 of 40</span>
+
+            <Button variant="secondary">
+                Next
+                <IconChevronRight />
+            </Button>
+        </div>
     </div>
 </template>
 
 <style>
-    /* .main-card {
+    .main-card {
         display: flex;
         flex-direction: column;
-    } */
+    }
 
     .main-card--content {
         display: flex;
@@ -59,6 +67,8 @@
         align-items: center;
         justify-content: center;
         flex-grow: 1;
+        
+        padding: 20px;
     }
 
     .main-card--footer {
@@ -68,6 +78,12 @@
 
         border-top: 1px solid var(--color-border);
         padding: var(--card-padding-lg);
+    }
+
+    .card-count {
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--app-neutral-600);
     }
 
     .no-content {
@@ -80,6 +96,7 @@
         margin-bottom: 0.75rem;
     }
     .no-content p {
+        color: var(--color-muted-foreground);
         line-height: 140%;
     }
 

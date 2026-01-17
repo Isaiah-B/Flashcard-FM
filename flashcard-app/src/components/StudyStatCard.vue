@@ -32,11 +32,6 @@
         overflow: hidden;
     }
 
-    .stats-header {
-        font-size: var(--text-2xl);
-        font-weight: 600;
-        margin-bottom: var(--app-spacing-16);
-    }
     .stat-card--content {
         padding: 20px;
     }
@@ -54,6 +49,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: var(--app-spacing-48) 2rem;
+
+        width: 100px;
+        padding: var(--app-spacing-48) 0;
+        border-left: 1px solid var(--color-border);
     }
 </style>

@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import StudyModeView from '@/views/StudyModeView.vue'
-import AllCardsView from '@/views/AllCardsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

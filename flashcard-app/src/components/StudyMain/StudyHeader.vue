@@ -21,8 +21,8 @@
         </div>
         
         <Button variant="secondary">
-            Shuffle
             <IconShuffle />
+            Shuffle
         </Button>
     </div>
 </template>
@@ -32,6 +32,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        font-weight: 500;
     }
     .checkbox-label input[type=checkbox] {
         margin-right: 8px;

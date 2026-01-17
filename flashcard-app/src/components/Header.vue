@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { Button, buttonVariants } from './ui/button';
+	import { Button } from './ui/button';
 
 </script>
 
@@ -33,6 +33,7 @@ import { Button, buttonVariants } from './ui/button';
 		gap: 4px;
 		
 		width: fit-content;
+		border: 1px solid var(--color-border);
 		border-radius: 999px;
 		padding: 4px;
 		

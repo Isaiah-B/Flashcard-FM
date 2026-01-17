@@ -20,6 +20,7 @@
   --color-border: var(--app-neutral-900);
 
   --color-text: var(--app-neutral-900);
+  --color-card: var(--app-white);
 
   --color-branding: var(--app-yellow-500);
 }
@@ -79,7 +80,7 @@ body {
   transition:
     color 0.5s,
     background-color 0.5s;
-  line-height: 1.6;
+  line-height: 1.5;
   font-family:
     'Poppins',
     -apple-system,
