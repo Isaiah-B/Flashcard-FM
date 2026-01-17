@@ -9,6 +9,44 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+}
+
+.sectioned-card {
+  padding: 0;  
+}
+
+.shadow-2 {
+  box-shadow: 2px 2px var(--color-border);
+}
+.shadow-3 {
+  box-shadow: 3px 3px var(--color-border);
+}
+.shadow-4 {
+  box-shadow: 4px 4px var(--color-border);
+}
+
+@theme {
+  --text-base: 1rem;
+  --text-3xl: calc(var(--text-base) * 2.5);   /* 40px */
+  --text-2xl: calc(var(--text-base) * 2);     /* 32px */
+  --text-xl: calc(var(--text-base) * 1.5);    /* 24px */
+  --text-lg: calc(var(--text-base) * 1.25);   /* 20px */
+  --text-md: calc(var(--text-base) * 1);      /* 16px */
+  --text-sm: calc(var(--text-base) * 0.875);  /* 14px */
+  --text-xs: calc(var(--text-base) * 0.75);   /* 12px */
 }
 
 @theme inline {

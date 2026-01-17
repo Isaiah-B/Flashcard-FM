@@ -24,19 +24,10 @@
   --color-branding: var(--app-yellow-500);
 }
 
-:root {
-  --text-base: 1rem;
-  --text-3xl: calc(var(--text-base) * 2.5);   /* 40px */
-  --text-2xl: calc(var(--text-base) * 2);     /* 32px */
-  --text-xl: calc(var(--text-base) * 1.5);    /* 24px */
-  --text-lg: calc(var(--text-base) * 1.25);   /* 20px */
-  --text-md: calc(var(--text-base) * 1);      /* 16px */
-  --text-sm: calc(var(--text-base) * 0.875);  /* 14px */
-  --text-xs: calc(var(--text-base) * 0.75);   /* 12px */
-}
 
 :root {
   --app-spacing: 1rem;
+  --app-spacing-195: calc(var(--app-spacing) * 12.1875);
   --app-spacing-140: calc(var(--app-spacing) * 8.75);
   --app-spacing-128: calc(var(--app-spacing) * 8);
   --app-spacing-112: calc(var(--app-spacing) * 7);
@@ -55,6 +46,8 @@
   --app-spacing-6: calc(var(--app-spacing) * 0.375);
   --app-spacing-4: calc(var(--app-spacing) * 0.25);
   --app-spacing-2: calc(var(--app-spacing) * 0.125);
+
+  --card-padding-lg: 16px;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -79,6 +72,7 @@
 }
 
 body {
+  height: 100vh;
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
