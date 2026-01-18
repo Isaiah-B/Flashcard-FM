@@ -40,3 +40,6 @@ npm-debug.log*
 Thumbs.db
 
 README_.md
+
+.eslintcache
+.editorconfig

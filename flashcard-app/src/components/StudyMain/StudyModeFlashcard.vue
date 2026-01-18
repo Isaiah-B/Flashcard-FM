@@ -1,18 +1,20 @@
 <script setup lang="ts">
-    import { computed, ref } from 'vue';
+    import { computed, ref, watch } from 'vue';
     import { Button } from '../ui/button';
     
-    import ProgressBar from '../ProgressBar.vue';
-    
-    import IconCircleCheck from '../icons/IconCircleCheck.vue';
-    import IconReset from '../icons/IconReset.vue';
+    import { useFlashcardStore } from '@/stores/flashcards';
 
+    import ProgressBar from '../ProgressBar.vue';
+    import IconReset from '../icons/IconReset.vue';
+    import IconCircleCheck from '../icons/IconCircleCheck.vue';
+    
     import type { Flashcard } from '@/types/flashcard';
     
-    const { props } = defineProps<{ props: Flashcard }>();
+    const { card } = defineProps<{ card: Flashcard }>();
 
     const ansRevealed = ref(false);
-    const progress = ref(props.knownCount);
+
+    const isMastered = computed(() => card.knownCount >= 5);
 
     const cardBgClass = computed(() => ({
         'question-bg': !ansRevealed.value,
@@ -20,9 +22,14 @@
     }));
 
     const revealAnswer = () => ansRevealed.value = true;
-    const incrementProgress = () => progress.value++;
-    const resetProgress = () => progress.value = 0;
 
+    const store = useFlashcardStore();
+    const { incrementProgress, resetProgress } = store;
+
+    // Hide answer when card is changed
+    watch(() => card, () => {
+        ansRevealed.value = false;
+    });
 </script>
 
 <template>
@@ -32,17 +39,17 @@
             :class="cardBgClass"
         >
             <div class="study-flashcard--category shadow-1">
-                <span>{{ props.category }}</span>
+                <span>{{ card.category }}</span>
             </div>
     
             <div class="study-flashcard--content">
                 <div v-if="ansRevealed" class="study-flashcard--answer">
                     <h1 class="opacity-80">Answer:</h1>
-                    <p>{{ props.answer }}</p>
+                    <p>{{ card.answer }}</p>
                 </div>
     
                 <div v-else class="study-flashcard--question">
-                    <h1>{{ props.question }}</h1>
+                    <h1>{{ card.question }}</h1>
     
                     <Button
                         variant="ghost"
@@ -54,16 +61,23 @@
                 </div>
             </div> 
     
-             <ProgressBar :count="props.knownCount" :max="5" />
+             <ProgressBar :count="card.knownCount" :max="5" />
         </div>
 
         <div class="flashcard-actions">
-            <Button variant="default_pop" @click="incrementProgress">
+            <Button
+                variant="default_pop"
+                :disabled="isMastered"
+                @click="incrementProgress(card.id)"
+            >
                 <IconCircleCheck />
-                I Know This
+                {{ isMastered
+                    ? `Already Mastered` 
+                    : `I Know This`
+                }}
             </Button>
 
-            <Button variant="secondary_pop" @click="resetProgress">
+            <Button variant="secondary_pop" @click="resetProgress(card.id)">
                 <IconReset />
                 Reset Progress
             </Button>

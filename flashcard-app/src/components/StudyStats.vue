@@ -1,9 +1,21 @@
 <script setup lang="ts">
+    import { storeToRefs } from 'pinia';
+
+    import { useFlashcardStore } from '@/stores/flashcards';
+
     import IconStatsInProgress from './icons/IconStatsInProgress.vue';
     import IconStatsMastered from './icons/IconStatsMastered.vue';
     import IconStatsNotStarted from './icons/IconStatsNotStarted.vue';
     import IconStatsTotal from './icons/IconStatsTotal.vue';
     import StudyStatCard from './StudyStatCard.vue';
+
+    const store = useFlashcardStore();
+    const {
+        totalCards,
+        masteredCount,
+        inProgressCount,
+        notStartedCount
+    } = storeToRefs(store);
 </script>
 
 <template>
@@ -13,7 +25,7 @@
         <div class="stat-list">
             <StudyStatCard
                 :title="'Total Cards'"
-                :value="0"
+                :value="totalCards"
                 :color="'#92ADEB'"
             >
                 <IconStatsTotal />
@@ -21,7 +33,7 @@
             
             <StudyStatCard
                 :title="'Mastered'"
-                :value="0"
+                :value="masteredCount"
                 :color="'#47D9C9'"
             >
                 <IconStatsMastered />
@@ -29,7 +41,7 @@
 
             <StudyStatCard
                 :title="'In Progress'"
-                :value="0"
+                :value="inProgressCount"
                 :color="'#E11966'"
             >
                 <IconStatsInProgress />
@@ -37,7 +49,7 @@
         
             <StudyStatCard
             :title="'Not Started'"
-                :value="0"
+                :value="notStartedCount"
                 :color="'#F073A3'"
             >
                 <IconStatsNotStarted />

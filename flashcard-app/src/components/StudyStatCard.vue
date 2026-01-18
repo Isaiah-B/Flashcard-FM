@@ -1,7 +1,7 @@
 <script setup lang="ts">
     interface StudyStatProps {
         title: string,
-        value: number,
+        value?: number,
         color: string
     }
 
@@ -12,7 +12,7 @@
     <div class="stat-card shadow-2">
         <div class="stat-card--content">
             <h2>{{ props.title }}</h2>
-            <span>{{ props.value }}</span>
+            <span>{{ props.value || 0 }}</span>
         </div>
 
         <div class="stat-card--icon" :style="{ backgroundColor: props.color }">

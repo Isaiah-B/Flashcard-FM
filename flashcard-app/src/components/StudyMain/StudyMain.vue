@@ -1,6 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
-
+    import { storeToRefs } from 'pinia';
     import { Button } from '../ui/button';
 
     import IconChevronLeft from '../icons/IconChevronLeft.vue';
@@ -9,11 +8,11 @@
     import StudyHeader from './StudyHeader.vue';
     import StudyModeFlashcard from './StudyModeFlashcard.vue';
     
-    import { type Flashcard } from '@/types/flashcard';
+    import { useFlashcardStore } from '@/stores/flashcards';
 
-    import data from '../../../data.json';
-
-    const cards = ref<Flashcard[]>(data.flashcards);
+    const store = useFlashcardStore();
+    const { flashcards, currentCard, totalCards } = storeToRefs(store);
+    const { increment, decrement } = store;
 </script>
 
 <template>
@@ -21,8 +20,8 @@
         <StudyHeader />
         
         <div class="main-card--content">
-            <StudyModeFlashcard v-if="cards.length > 0"
-                :props="cards[0]!"
+            <StudyModeFlashcard v-if="flashcards && flashcards.length > 0"
+                :card="flashcards[currentCard!]!"
             />
             
     
@@ -39,15 +38,17 @@
             </div>
         </div>
 
-        <div v-if="cards.length > 0" class="main-card--footer">
-            <Button variant="secondary">
+        <div v-if="flashcards && flashcards.length > 0" class="main-card--footer">
+            <Button variant="secondary" @click="decrement">
                 <IconChevronLeft />
                 Previous
             </Button>
 
-            <span class="card-count">Card 1 of 40</span>
+            <span class="card-count">
+                {{ `Card ${currentCard! + 1} of ${totalCards}` }}
+            </span>
 
-            <Button variant="secondary">
+            <Button variant="secondary" @click="increment">
                 Next
                 <IconChevronRight />
             </Button>
