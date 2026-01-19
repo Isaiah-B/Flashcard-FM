@@ -11,7 +11,7 @@
     import { useFlashcardStore } from '@/stores/flashcards';
 
     const store = useFlashcardStore();
-    const { flashcards, currentCard, totalCards } = storeToRefs(store);
+    const { flashcards, currentCard } = storeToRefs(store);
     const { increment, decrement } = store;
 </script>
 
@@ -45,7 +45,7 @@
             </Button>
 
             <span class="card-count">
-                {{ `Card ${currentCard! + 1} of ${totalCards}` }}
+                {{ `Card ${currentCard! + 1} of ${flashcards.length}` }}
             </span>
 
             <Button variant="secondary" @click="increment">

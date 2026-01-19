@@ -4,10 +4,8 @@
   import Header from './components/Header.vue';
   import { useFlashcardStore } from './stores/flashcards';
 
-  import data from '../data.json';
-
   const flashcardState = useFlashcardStore();
-  flashcardState.initStore(data.flashcards);
+  flashcardState.initStore();
 </script>
 
 <template>

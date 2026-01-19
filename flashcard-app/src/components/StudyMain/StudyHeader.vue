@@ -1,21 +1,34 @@
 <script setup lang="ts">
+    import { ref, watch } from 'vue';
+
     import { Button } from '../ui/button';
     import { Checkbox } from '../ui/checkbox';
 
-    import IconChevronDown from '../icons/IconChevronDown.vue';
     import IconShuffle from '../icons/IconShuffle.vue';
+    import CategoriesDropdown from '../CategoriesDropdown.vue';
+
+    import { useFlashcardStore } from '@/stores/flashcards';
+
+    const checked = ref(false);
+
+    const store = useFlashcardStore();
+    const { addFilter, removeFilter } = store;
+
+    watch(checked, () => {
+        if (checked.value)
+            addFilter('hideMastered');
+        else
+            removeFilter('hideMastered');
+    })
 </script>
 
 <template>
     <div class="main-card--header">
         <div class="main-card--filter">
-            <Button variant="secondary">
-                All Categories
-                <IconChevronDown />
-            </Button>
+            <CategoriesDropdown />
 
             <label class="checkbox-label">
-                <Checkbox />
+                <Checkbox v-model="checked" />
                 Hide Mastered
             </label>
         </div>
