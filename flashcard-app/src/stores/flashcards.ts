@@ -9,13 +9,18 @@ interface FlashcardStore {
 	InitStore: () => void
 }
 
+interface Filters {
+	hideMastered: boolean,
+	categories: Set<string>
+}
+
 export const useFlashcardStore = defineStore('flashcards', () => {
-	const allFlashcards = ref<Flashcard[]>();
-	const flashcards = ref<Flashcard[]>();
-	const filters = ref<string[]>([]);
+	const allFlashcards = ref<Flashcard[]>([]);
+	const flashcards = ref<Flashcard[]>([]);
+	const filters = ref<Filters>({ hideMastered: false, categories: new Set() });
 	const categories = ref<Map<string, number>>();
 
-	const currentCard = ref<number>();
+	const currentCard = ref<number>(0);
 
 	const totalCards = computed(() => allFlashcards.value?.length);
 
@@ -48,23 +53,20 @@ export const useFlashcardStore = defineStore('flashcards', () => {
 	}
 
 	const increment = () => {
-		if (currentCard.value != undefined) {
-			const nextIndex = currentCard.value + 1;
+		const nextIndex = currentCard.value + 1;
 
-			if (nextIndex <= totalCards.value!)
-				currentCard.value = nextIndex;
-			else
-				currentCard.value = 0;
-		}
+		currentCard.value = nextIndex <= flashcards.value.length - 1
+			? nextIndex
+			: 0;
 	}
 
 	const decrement = () => {
-		if (currentCard.value != undefined) {
-			const prevIndex = currentCard.value - 1;
+		const prevIndex = currentCard.value - 1;
 
-			if (prevIndex >= 0)
-				currentCard.value = prevIndex;
-		}
+		currentCard.value = prevIndex >= 0
+			? prevIndex
+			: flashcards.value.length - 1
+			
 	}
 
 	const incrementProgress = (id: string) => {
@@ -85,43 +87,52 @@ export const useFlashcardStore = defineStore('flashcards', () => {
 		}
 	}
 
-	const addFilter = (name: string) => {
-		if (filters.value?.includes(name))
-			return;
+	const updateFilters = (name: string) => {
+		if (name === 'hideMastered') {
+			filters.value.hideMastered = !filters.value.hideMastered;
+		}
+		else {
+			if (filters.value?.categories.has(name)) {
+				filters.value.categories.delete(name);
+			} else {
+				filters.value?.categories.add(name);
+			}
+			
+		}
 
-		filters.value?.push(name);
-
-		updateFilters();
-	}
-
-	const removeFilter = (name: string) => {	
-		filters.value = filters.value.filter(f => f != name);
-
-		updateFilters();
-	}
-
-	const updateFilters = () => {
-		if (filters.value?.length === 0) {
+		if (!filters.value.hideMastered && filters.value?.categories.size === 0) {
 			flashcards.value = [...allFlashcards.value!];
 			return;
 		}
 
-		console.log(filters.value)
-		const hideMastered = filters.value?.includes('hideMastered');
-
 		flashcards.value = allFlashcards.value?.filter(card => {
-			if (hideMastered && card.knownCount >= 5)
+			if (filters.value.hideMastered && card.knownCount >= 5)
 				return;
 
-			// if (filters.value?.includes(card.category))
-				return card;
+			if (filters.value.categories.size > 0) {
+				if (filters.value?.categories.has(card.category))
+					return card;
+			}
+			else
+				return card
 		})
+	}
+
+	const shuffle = () => {
+		let i = flashcards.value.length, j, temp;
+		while (--i > 0) {
+			j = Math.floor(Math.random() * (i + 1));
+			temp = flashcards.value[j];
+			flashcards.value[j] = flashcards.value[i]!;
+			flashcards.value[i] = temp!;
+		}
 	}
 
 	return {
 		allFlashcards,
 		flashcards,
 		categories,
+		filters,
 		currentCard,
 		totalCards,
 		masteredCount,
@@ -132,8 +143,7 @@ export const useFlashcardStore = defineStore('flashcards', () => {
 		decrement,
 		incrementProgress,
 		resetProgress,
-		addFilter,
-		removeFilter,
-		updateFilters
+		updateFilters,
+		shuffle
 	}
 });

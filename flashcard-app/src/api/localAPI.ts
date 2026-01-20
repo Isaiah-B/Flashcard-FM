@@ -45,7 +45,7 @@ export function getCategories(): Map<string, number> {
     throw new Error('Failed to retrieve categories from LocalStorage');
 }
 
-export function updateCard(id: String, updated: Flashcard) {
+export function updateCard(id: string, updated: Flashcard) {
     const entry = localStorage.getItem('flashcards');
 
     if (!entry) {

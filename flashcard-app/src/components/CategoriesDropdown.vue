@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref, watchEffect } from 'vue';
+    import { computed, ref } from 'vue';
 
     import { Button } from './ui/button';
     import { Checkbox } from './ui/checkbox';
@@ -12,18 +12,19 @@
     
     import IconChevronDown from './icons/IconChevronDown.vue';
 
+    import { useFlashcardStore } from '@/stores/flashcards';
+
     import FlashcardsAPI from '@/api/flashcardsAPI';
 
-    const categories = ref<Map<string, number>>();
-    const categoryKeys = ref<string[]>();
-
-    watchEffect(() => {
-        categories.value = FlashcardsAPI.GetCategories();
-        console.log(categories.value)
-        categoryKeys.value = Array
-            .from(categories.value!.keys())
-            .sort();
-    });
+    const store = useFlashcardStore();
+    const { updateFilters } = store;
+    
+    const appliedFilters = ref<string[]>([]);
+    const categoryKeys = computed(() => (
+        Array
+            .from(FlashcardsAPI.GetCategories()!.keys())
+            .sort()
+    ));
 </script>
 
 <template>
@@ -37,10 +38,16 @@
             <DropdownMenuContent>
                 <DropdownMenuItem v-for="key in categoryKeys"
                     class="category-dropdown-item"
+                    @select.prevent
                 >
-                    <Checkbox />
-                    <span class="category-key">{{ key }}</span>
-                    <span class="category-value">({{ categories?.get(key) }})</span>
+                    <label class="checkbox-label">
+                        <Checkbox
+                            :model-value="store.filters.categories.has(key)"
+                            @click="updateFilters(key)"
+                        />
+                        <span class="category-key">{{ key }}</span>
+                        <span class="category-value">({{ store.categories?.get(key) }})</span>
+                    </label>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenuTrigger>
@@ -52,6 +59,12 @@
         font-size: var(--text-sm);
         font-weight: 500;
         line-height: 140%;
+        padding: 0;
+    }
+
+    .checkbox-label {
+        width: 100%;
+        padding: 8px;
     }
 
     .category-value {

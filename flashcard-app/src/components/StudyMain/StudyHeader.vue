@@ -1,6 +1,4 @@
 <script setup lang="ts">
-    import { ref, watch } from 'vue';
-
     import { Button } from '../ui/button';
     import { Checkbox } from '../ui/checkbox';
 
@@ -9,17 +7,8 @@
 
     import { useFlashcardStore } from '@/stores/flashcards';
 
-    const checked = ref(false);
-
     const store = useFlashcardStore();
-    const { addFilter, removeFilter } = store;
-
-    watch(checked, () => {
-        if (checked.value)
-            addFilter('hideMastered');
-        else
-            removeFilter('hideMastered');
-    })
+    const { updateFilters, shuffle } = store;
 </script>
 
 <template>
@@ -28,12 +17,12 @@
             <CategoriesDropdown />
 
             <label class="checkbox-label">
-                <Checkbox v-model="checked" />
+                <Checkbox @click="updateFilters('hideMastered')" />
                 Hide Mastered
             </label>
         </div>
         
-        <Button variant="secondary">
+        <Button variant="secondary" @click="shuffle">
             <IconShuffle />
             Shuffle
         </Button>
