@@ -1,3 +1,10 @@
+<script setup lang="ts">
+    import CardForm from '@/components/Cards/CardForm.vue';
+
+</script>
+
 <template>
-    <h1>All Cards</h1>
+   <div>
+        <CardForm />
+   </div>
 </template>
