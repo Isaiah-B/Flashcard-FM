@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import StudyMain from '@/components/StudyMain/StudyMain.vue';
-    import StudyStats from '@/components/StudyStats.vue';
+    import StudyStats from '@/components/StudyMain/StudyStats.vue';
 </script>
 
 <template>

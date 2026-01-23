@@ -1,9 +1,9 @@
 <script setup lang="ts">
-    import { Button } from '../ui/button';
-    import { Checkbox } from '../ui/checkbox';
+    import { Button } from './ui/button';
+    import { Checkbox } from './ui/checkbox';
 
-    import IconShuffle from '../icons/IconShuffle.vue';
-    import CategoriesDropdown from '../CategoriesDropdown.vue';
+    import IconShuffle from './icons/IconShuffle.vue';
+    import CategoriesDropdown from './CategoriesDropdown.vue';
 
     import { useFlashcardStore } from '@/stores/flashcards';
 
@@ -12,10 +12,10 @@
 </script>
 
 <template>
-    <div class="main-card--header">
-        <div class="main-card--filter">
+    <div class="filter-container">
+        <div class="card-filter">
             <CategoriesDropdown />
-
+    
             <label class="checkbox-label">
                 <Checkbox @click="updateFilters('hideMastered')" />
                 Hide Mastered
@@ -40,7 +40,7 @@
         margin-right: 8px;
     }
 
-    .main-card--header {
+    .filter-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -49,7 +49,7 @@
         padding: var(--card-padding-lg);
     }
 
-    .main-card--filter {
+    .card-filter {
         display: flex;
         gap: 16px;
     }

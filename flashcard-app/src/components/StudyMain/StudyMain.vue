@@ -5,7 +5,7 @@
     import IconChevronLeft from '../icons/IconChevronLeft.vue';
     import IconChevronRight from '../icons/IconChevronRight.vue';
 
-    import StudyHeader from './StudyHeader.vue';
+    import CardFilter from '../CardFilter.vue';
     import StudyModeFlashcard from './StudyModeFlashcard.vue';
     
     import { useFlashcardStore } from '@/stores/flashcards';
@@ -17,7 +17,7 @@
 
 <template>
     <div class="card sectioned-card main-card shadow-3">
-        <StudyHeader />
+        <CardFilter />
         
         <div class="main-card--content">
             <StudyModeFlashcard v-if="flashcards && flashcards.length > 0"
