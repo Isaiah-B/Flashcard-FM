@@ -17,7 +17,9 @@
 
 <template>
     <div class="card sectioned-card main-card shadow-3">
-        <CardFilter />
+        <div class="main-card--header">
+            <CardFilter />
+        </div>
         
         <div class="main-card--content">
             <StudyModeFlashcard v-if="flashcards && flashcards.length > 0"
@@ -60,6 +62,11 @@
     .main-card {
         display: flex;
         flex-direction: column;
+    }
+
+    .main-card--header {
+        padding: var(--card-padding-lg);
+        border-bottom: 1px solid var(--color-border);
     }
 
     .main-card--content {

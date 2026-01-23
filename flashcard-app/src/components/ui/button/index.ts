@@ -13,12 +13,14 @@ export const buttonVariants = cva(
         default_pop:
           "bg-branding border rounded-full text-primary-foreground shadow-pop-shadow hover:shadow-pop-hover focus-visible:shadow-pop-focus",
           
-          secondary:
-            "bg-secondary border rounded-full text-secondary-foreground hover:bg-secondary-hover",
-          secondary_pop:
-            "bg-secondary border rounded-full text-secondary-foreground shadow-pop-shadow hover:shadow-pop-hover focus-visible:shadow-pop-focus",
-          
-          link: "rounded-full text-secondary-foreground border border-transparent hover:border-border",
+        secondary:
+          "bg-secondary border rounded-full text-secondary-foreground hover:bg-secondary-hover",
+        secondary_pop:
+          "bg-secondary border rounded-full text-secondary-foreground shadow-pop-shadow hover:shadow-pop-hover focus-visible:shadow-pop-focus",
+        
+        link: "rounded-full text-secondary-foreground border border-transparent hover:border-border",
+
+        menu: "bg-none border border-transparent rounded text-secondary-foreground hover:border-border",
 
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",

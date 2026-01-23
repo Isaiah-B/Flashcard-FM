@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { computed, ref } from 'vue';
+    import { computed } from 'vue';
 
     import { Button } from './ui/button';
     import { Checkbox } from './ui/checkbox';
@@ -19,7 +19,6 @@
     const store = useFlashcardStore();
     const { updateFilters } = store;
     
-    const appliedFilters = ref<string[]>([]);
     const categoryKeys = computed(() => (
         Array
             .from(FlashcardsAPI.GetCategories()!.keys())
@@ -37,6 +36,7 @@
 
             <DropdownMenuContent>
                 <DropdownMenuItem v-for="key in categoryKeys"
+                    :key="key"
                     class="category-dropdown-item"
                     @select.prevent
                 >
@@ -61,10 +61,11 @@
         line-height: 140%;
         padding: 0;
     }
-
+    
     .checkbox-label {
         width: 100%;
         padding: 8px;
+        cursor: pointer;
     }
 
     .category-value {

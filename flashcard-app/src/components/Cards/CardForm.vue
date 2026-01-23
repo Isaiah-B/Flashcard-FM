@@ -28,7 +28,7 @@
 
 <template>
     <form class="card form-card shadow-4">
-        <FormField v-slot="{ componentField }" name="question">
+        <FormField name="question">
             <FormItem>
                 <FormLabel class="form-label">Question</FormLabel>
                 <FormControl>
