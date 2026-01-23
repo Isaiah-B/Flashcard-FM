@@ -3,10 +3,10 @@
 
     import { useFlashcardStore } from '@/stores/flashcards';
 
-    import IconStatsInProgress from './icons/IconStatsInProgress.vue';
-    import IconStatsMastered from './icons/IconStatsMastered.vue';
-    import IconStatsNotStarted from './icons/IconStatsNotStarted.vue';
-    import IconStatsTotal from './icons/IconStatsTotal.vue';
+    import IconStatsInProgress from '../icons/IconStatsInProgress.vue';
+    import IconStatsMastered from '../icons/IconStatsMastered.vue';
+    import IconStatsNotStarted from '../icons/IconStatsNotStarted.vue';
+    import IconStatsTotal from '../icons/IconStatsTotal.vue';
     import StudyStatCard from './StudyStatCard.vue';
 
     const store = useFlashcardStore();
